@@ -40,6 +40,13 @@ namespace Tibialyzer {
                     if (!GetWindowRect(tibia_process.MainWindowHandle, ref Rect)) return null;
                 }
 
+                Point p = toPixels(new Point(Rect.left, Rect.top));
+                Rect.left = p.X;
+                Rect.top = p.Y;
+                p = toPixels(new Point(Rect.right, Rect.bottom));
+                Rect.right = p.X;
+                Rect.bottom = p.Y;
+
                 Bitmap bitmap = new Bitmap(Rect.right - Rect.left, Rect.bottom - Rect.top);
                 using (Graphics gr = Graphics.FromImage(bitmap)) {
                     gr.CopyFromScreen(new Point(Rect.left, Rect.top), Point.Empty, bitmap.Size);
@@ -49,6 +56,13 @@ namespace Tibialyzer {
                 MainForm.mainForm.DisplayWarning("Failed to take screenshot: " + ex.Message);
                 return null;
             }
+        }
+
+        public static Point toPixels(Point point) {
+            Point result = new Point();
+            result.X = (int)(point.X * 1.5f);
+            result.Y = (int)(point.Y * 1.5f);
+            return result;
         }
 
         public static void saveScreenshot(string name, Bitmap bitmap) {

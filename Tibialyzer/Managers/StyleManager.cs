@@ -21,7 +21,7 @@ namespace Tibialyzer {
     class StyleManager {
         #region UI Colors
         public static Color NotificationBackgroundColor = Color.FromArgb(0, 51, 102);
-        public static Color NotificationTextColor = Color.FromArgb(191, 191, 191);
+        public static Color NotificationTextColor = Color.FromArgb(255, 255, 255);
 
         public static Color NotificationHeaderBackgroundColor = Color.FromArgb(40, 40, 40);
         public static Color NotificationHeaderColor = Color.FromArgb(255, 255, 255);
@@ -78,7 +78,7 @@ namespace Tibialyzer {
         public static Color HealthDanger = Color.FromArgb(145, 35, 35);
         public static Color HealthCritical = Color.FromArgb(47, 0, 0);
         public static Color ManaColor = Color.FromArgb(54, 51, 167);
-        public static Color ExperienceColor = Color.FromArgb(64, 64, 64);
+        public static Color ExperienceColor = Color.FromArgb(135, 126, 85);
         public static Color SummaryExperienceColor = Color.FromArgb(34, 177, 76);
 
 

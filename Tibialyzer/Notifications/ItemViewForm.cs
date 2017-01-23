@@ -75,6 +75,7 @@ namespace Tibialyzer {
         private List<Label> valueLabels = new List<Label>();
         private Label goldPerCapLabel;
         private Label capacityLabel;
+        private Label usageLabel;
         private string[] headers = { "Sell To", "Buy From", "Dropped", "Rewarded" };
         public ItemViewForm(int currentPage, int currentDisplay) {
             skip_event = true;
@@ -199,6 +200,7 @@ namespace Tibialyzer {
             this.itemPictureBox = new System.Windows.Forms.PictureBox();
             this.goldPerCapLabel = new System.Windows.Forms.Label();
             this.capacityLabel = new System.Windows.Forms.Label();
+            this.usageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.decreaseValue10000000000)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.increaseValue10000000000)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.decreaseValue1000000000)).BeginInit();
@@ -583,7 +585,7 @@ namespace Tibialyzer {
             this.convertBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.convertBox.Location = new System.Drawing.Point(239, 75);
             this.convertBox.Name = "convertBox";
-            this.convertBox.Size = new System.Drawing.Size(104, 17);
+            this.convertBox.Size = new System.Drawing.Size(150, 24);
             this.convertBox.TabIndex = 6;
             this.convertBox.Text = "Convert To Gold";
             this.convertBox.UseVisualStyleBackColor = false;
@@ -596,7 +598,7 @@ namespace Tibialyzer {
             this.pickupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.pickupBox.Location = new System.Drawing.Point(133, 76);
             this.pickupBox.Name = "pickupBox";
-            this.pickupBox.Size = new System.Drawing.Size(87, 17);
+            this.pickupBox.Size = new System.Drawing.Size(125, 24);
             this.pickupBox.TabIndex = 5;
             this.pickupBox.Text = "Pick Up Item";
             this.pickupBox.UseVisualStyleBackColor = false;
@@ -610,7 +612,7 @@ namespace Tibialyzer {
             this.lookText.Location = new System.Drawing.Point(141, 95);
             this.lookText.MaximumSize = new System.Drawing.Size(210, 0);
             this.lookText.Name = "lookText";
-            this.lookText.Size = new System.Drawing.Size(64, 13);
+            this.lookText.Size = new System.Drawing.Size(93, 20);
             this.lookText.TabIndex = 3;
             this.lookText.Text = "You see a...";
             // 
@@ -679,9 +681,24 @@ namespace Tibialyzer {
             this.capacityLabel.Text = "35.0 oz.";
             this.capacityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // usageLabel
+            // 
+            this.usageLabel.BackColor = System.Drawing.Color.Transparent;
+            this.usageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.usageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usageLabel.ForeColor = System.Drawing.Color.Chartreuse;
+            this.usageLabel.Location = new System.Drawing.Point(34, 155);
+            this.usageLabel.Name = "usageLabel";
+            this.usageLabel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.usageLabel.Size = new System.Drawing.Size(96, 19);
+            this.usageLabel.TabIndex = 63;
+            this.usageLabel.Text = "Imbuiments";
+            this.usageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ItemViewForm
             // 
-            this.ClientSize = new System.Drawing.Size(378, 165);
+            this.ClientSize = new System.Drawing.Size(378, 192);
+            this.Controls.Add(this.usageLabel);
             this.Controls.Add(this.goldPerCapLabel);
             this.Controls.Add(this.capacityLabel);
             this.Controls.Add(this.valueDigit10000000000);
@@ -795,6 +812,7 @@ namespace Tibialyzer {
 
             this.capacityLabel.Text = String.Format("{0:0.0} oz.", item.capacity);
             this.goldPerCapLabel.Text = String.Format("{0}/oz.", StyleManager.GoldToText(item.GetMaxValue() / item.capacity));
+            this.usageLabel.Text = String.Format("", StyleManager.GoldToText(item.GetMaxValue() / item.capacity));
 
             this.itemCategory.Text = item.category;
             f = StyleManager.FontList[0];
@@ -1078,18 +1096,19 @@ namespace Tibialyzer {
             if (this.Size.Width == MinWidth()) {
                 lookText.Visible = false;
                 for(int i = valueLabels.Count - 1; i >= 0; i--) {
-                    increaseBoxes[i].Location = new Point(8 + 16 * (valueLabels.Count - (i + 1)), 160);
+                    increaseBoxes[i].Location = new Point(8 + 16 * (valueLabels.Count - (i + 1)), 178);
                     valueLabels[i].Location = new Point(increaseBoxes[i].Location.X, increaseBoxes[i].Location.Y + 16);
                     decreaseBoxes[i].Location = new Point(valueLabels[i].Location.X, valueLabels[i].Location.Y + 16);
                 }
-                pickupBox.Location = new Point(4, 208);
-                convertBox.Location = new Point(90, 208);
+                pickupBox.Location = new Point(4, 226);
+                convertBox.Location = new Point(90, 226);
                 itemPictureBox.Location = new Point(this.Size.Width / 2 - itemPictureBox.Width / 2, itemPictureBox.Location.Y);
                 itemCategory.Location = new Point(this.Size.Width / 2 - itemCategory.Width / 2, itemCategory.Location.Y);
                 itemName.Location = new Point(this.Size.Width / 2 - itemName.Width / 2, itemName.Location.Y);
                 capacityLabel.Location = new Point(this.Size.Width / 2 - capacityLabel.Width / 2, capacityLabel.Location.Y);
                 goldPerCapLabel.Location = new Point(this.Size.Width / 2 - goldPerCapLabel.Width / 2, goldPerCapLabel.Location.Y);
-                base_y = 228;
+                usageLabel.Location = new Point(this.Size.Width / 2 - usageLabel.Width / 2, usageLabel.Location.Y);
+                base_y = 246;
                 refreshHeaders();
                 base_y += 25;
                 refreshObjectList();
@@ -1114,6 +1133,7 @@ namespace Tibialyzer {
                 this.itemPictureBox.Location = new Point(66, 56);
                 this.capacityLabel.Location = new Point(34, 119);
                 this.goldPerCapLabel.Location = new Point(34, 137);
+                this.usageLabel.Location = new Point(34, 155);
                 base_y = initialOffset;
                 refreshHeaders();
                 base_y += 25;

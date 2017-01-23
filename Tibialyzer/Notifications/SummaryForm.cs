@@ -101,7 +101,7 @@ namespace Tibialyzer {
                 }
                 gr.DrawRectangle(Pens.Black, new Rectangle((int)p.GetBounds().X - 8, 0, (int)p.GetBounds().Width + 16, maxHeight - 1));
             }
-            using (Pen pen = new Pen(traceColor, 2)) {
+            using (Pen pen = new Pen(traceColor, 3)) {
                 gr.DrawPath(pen, p);
             }
             using (SolidBrush brush = new SolidBrush(textColor)) {
